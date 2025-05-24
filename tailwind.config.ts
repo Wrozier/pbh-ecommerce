@@ -1,18 +1,12 @@
-import type { Config } from 'tailwindcss';
-
-const config: Config = {
-    content: [
-        './app/**/*.{js,ts,jsx,tsx}', // Adjust paths based on your project structure
-    ],
-    theme: {
-        extend: {
-            colors: {
-                primary: '#1D4ED8',
-                secondary: '#9333EA',
-            },
-        },
-    },
-    plugins: [],
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './sanity/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
 };
-
-export default config;

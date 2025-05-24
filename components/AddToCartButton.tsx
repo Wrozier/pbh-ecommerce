@@ -1,5 +1,6 @@
 "use client";
-import { Product } from "@/sanity.types";
+// Update the import below to match the actual export from "@/sanity.types"
+import type { Product } from "@/sanity.types";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { twMerge } from "tailwind-merge";

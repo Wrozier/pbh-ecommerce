@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import Form from "next/form";
 import { ClerkLoaded, UserButton } from "@clerk/nextjs";
 import { auth, currentUser } from "@clerk/nextjs/server";
@@ -23,7 +22,7 @@ const Header = async () => {
     <div className="bg-white sticky top-0 z-50 border-b border-b-gray-200 py-1">
       <Container>
         <header className="flex gap-2 flex-wrap justify-between items-center py-2">
-          <Link href={"/"}>
+          <Link href="/">
             <Image
               src={logo}
               alt="logo"
@@ -45,18 +44,17 @@ const Header = async () => {
           </Form>
           <div className="flex items-center space-x-4 sm:mt-0 flex-1 sm:flex-none">
             <CartIcon />
-            {/* User icons */}
             <ClerkLoaded>
-              {user && (
+              {userId && (
                 <Link
-                  href={"/orders"}
+                  href="/orders"
                   className="flex items-center text-sm gap-2 border border-gray-200 px-2 py-1 rounded-md shadow-md hover:shadow-none hoverEffect"
                 >
                   <BsBasket className="text-2xl text-darkBlue" />
                   <span className="flex flex-col">
                     <p className="text-xs">
                       <span className="font-semibold">
-                        {orders && orders?.length > 0 ? orders?.length : 0}
+                        {orders?.length || 0}
                       </span>{" "}
                       items
                     </p>
@@ -64,18 +62,17 @@ const Header = async () => {
                   </span>
                 </Link>
               )}
-
-              {user ? (
+              {userId ? (
                 <div className="flex items-center text-sm gap-2 border border-gray-200 px-2 py-1 rounded-md shadow-md hover:shadow-none hoverEffect">
                   <UserButton />
                   <div className="text-xs">
                     <p className="text-gray-400">Welcome Back</p>
-                    <p className="font-bold">{user?.fullName}</p>
+                    <p className="font-bold">{user?.fullName || "User"}</p>
                   </div>
                 </div>
               ) : (
                 <Link
-                  href={"/sign-in"}
+                  href="/sign-in"
                   className="flex items-center text-sm gap-2 border border-gray-200 px-2 py-1 rounded-md shadow-md cursor-pointer hover:shadow-none hoverEffect"
                 >
                   <FiUser className="text-2xl text-darkBlue" />
