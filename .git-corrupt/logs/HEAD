@@ -1,0 +1,9 @@
+0000000000000000000000000000000000000000 b73138c13bfc2c35dcdb395e656cb4532e6ba7e7 William Rozier <wrozier@princesscruises.com> 1747842645 -0400	commit (initial): first commit
+b73138c13bfc2c35dcdb395e656cb4532e6ba7e7 0000000000000000000000000000000000000000 William Rozier <wrozier@princesscruises.com> 1747842655 -0400	Branch: renamed refs/heads/hero-section to refs/heads/main
+0000000000000000000000000000000000000000 b73138c13bfc2c35dcdb395e656cb4532e6ba7e7 William Rozier <wrozier@princesscruises.com> 1747842655 -0400	Branch: renamed refs/heads/hero-section to refs/heads/main
+b73138c13bfc2c35dcdb395e656cb4532e6ba7e7 52d9c59de2e5049af6276d4f6c112f0c1a0ef2c4 William Rozier <wrozier@princesscruises.com> 1747845540 -0400	commit: second commit
+52d9c59de2e5049af6276d4f6c112f0c1a0ef2c4 cdb1a33fd7283ffbebf13143fd8efb307fb4b106 William Rozier <wrozier@princesscruises.com> 1747846920 -0400	commit: third commit
+cdb1a33fd7283ffbebf13143fd8efb307fb4b106 d66223ee514ce00432dc44effc4f54bacbc5fb2c William Rozier <wrozier@princesscruises.com> 1747847345 -0400	commit: API Work
+d66223ee514ce00432dc44effc4f54bacbc5fb2c 4b54b47f372271f9d95a026e943eb52e8f2e617e William Rozier <wrozier@princesscruises.com> 1748008839 -0400	commit: Sanity studio connected & Sripe Update
+4b54b47f372271f9d95a026e943eb52e8f2e617e 6ab0e601e6bf5b46702f8febc397020d3304b86b William Rozier <wrozier@princesscruises.com> 1748011460 -0400	commit: Sanity studio connected & Sripe Update
+6ab0e601e6bf5b46702f8febc397020d3304b86b 772c43ddafb26ee44e2c5fc417b98da6a7b6420d William Rozier <wrozier@princesscruises.com> 1748130062 -0400	commit: Huge update deploying to vercel
