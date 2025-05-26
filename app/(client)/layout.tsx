@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Poppins } from "next/font/google";
 import "../globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { SanityLive } from "@/sanity/lib/live";
@@ -8,10 +8,12 @@ import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import DisableDraftMode from "@/components/DisableDraftMode";
 
-const poppins = localFont({
-  src: "./fonts/Poppins.woff2",
+const poppins = Poppins({
+  weight: ["400", "600", "700"],
+  style: ["normal"],
+  subsets: ["latin"],
   variable: "--font-poppins",
-  weight: "400",
+  display: "swap",
   preload: false,
 });
 
@@ -27,8 +29,8 @@ export default async function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={`${poppins.variable} antialiased`}>
+      <html lang="en" className={poppins.className}>
+        <body className="antialiased">
           {(await draftMode()).isEnabled && (
             <>
               <DisableDraftMode />
