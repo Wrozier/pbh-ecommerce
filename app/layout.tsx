@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata } from "next/types";
 
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -32,7 +32,7 @@ export default async function RootLayout({
 
   return (
     <ClerkProvider>
-      <html lang="en" className={poppins.variable}> {/* ✅ Set font variable here */}
+      <html lang="en" className={poppins.variable}> 
         <body className="antialiased">
           {isEnabled && (
             <>

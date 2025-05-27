@@ -1,5 +1,5 @@
 export const COUPON_CODES = {
-  BERRY: "BERRY",
+  BERRY: "PREMIUM15",
   NEW_YEAR: "NEW_YEAR",
 } as const;
 

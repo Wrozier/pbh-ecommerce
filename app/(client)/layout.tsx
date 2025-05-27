@@ -1,21 +1,6 @@
-import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
-import "../globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import { SanityLive } from "@/sanity/lib/live";
-import { Toaster } from "react-hot-toast";
-import { VisualEditing } from "next-sanity";
-import { draftMode } from "next/headers";
-import DisableDraftMode from "@/components/DisableDraftMode";
-
-const poppins = Poppins({
-  weight: ["400", "600", "700"],
-  style: ["normal"],
-  subsets: ["latin"],
-  variable: "--font-poppins",
-  display: "swap",
-  preload: false,
-});
+import type { Metadata } from "next/types";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Ecommerce App for Shoppers",
@@ -28,28 +13,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en" className={poppins.className}>
-        <body className="antialiased">
-          {(await draftMode()).isEnabled && (
-            <>
-              <DisableDraftMode />
-              <VisualEditing />
-            </>
-          )}
-          {children}
-          <Toaster
-            position="bottom-right"
-            toastOptions={{
-              style: {
-                background: "#000000",
-                color: "#fff",
-              },
-            }}
-          />
-          <SanityLive />
-        </body>
-      </html>
-    </ClerkProvider>
+    <div>
+      <Header />
+      {children}
+      <Footer />
+    </div>
   );
 }
