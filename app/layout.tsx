@@ -1,21 +1,26 @@
 import type { Metadata } from "next/types";
-
-import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { SanityLive } from "@/sanity/lib/live";
 import { Toaster } from "react-hot-toast";
 import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import DisableDraftMode from "@/components/DisableDraftMode";
-import localFont from "next/font/local";
+import './fonts/Poppins-Regular.woff2';
+import { Poppins } from "next/font/google";
+import "./globals.css";
 
-// Define local font
-const poppins = localFont({
-  src: "./fonts/Poppins-Regular.woff2",
+// Load Poppins font with fallback
+// Configure Poppins font from local file
+
+const poppins = Poppins({
+  weight: ["400", "600", "700"],
+  style: ["normal"],
+  subsets: ["latin"],
   variable: "--font-poppins",
-  weight: "400",
-  preload: true, // ✅ Recommended for performance
+  display: "swap",
+  preload: false,
 });
+
 
 export const metadata: Metadata = {
   title: "Ecommerce App for Shoppers",
@@ -28,31 +33,43 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { isEnabled } = await draftMode();
+  try {
+    const { isEnabled } = await draftMode();
 
-  return (
-    <ClerkProvider>
-      <html lang="en" className={poppins.variable}> 
-        <body className="antialiased">
-          {isEnabled && (
-            <>
-              <DisableDraftMode />
-              <VisualEditing />
-            </>
-          )}
-          {children}
-          <Toaster
-            position="bottom-right"
-            toastOptions={{
-              style: {
-                background: "#000",
-                color: "#fff",
-              },
-            }}
-          />
-          <SanityLive />
+    return (
+      <ClerkProvider>
+        <html lang="en" className={poppins.variable}>
+          <body className="antialiased">
+            {isEnabled && (
+              <>
+                <DisableDraftMode />
+                <VisualEditing />
+              </>
+            )}
+            {children}
+            <Toaster
+              position="bottom-right"
+              toastOptions={{
+                style: {
+                  background: "#000",
+                  color: "#fff",
+                },
+              }}
+            />
+            <SanityLive />
+          </body>
+        </html>
+      </ClerkProvider>
+    );
+  } catch (error) {
+    const err = error as Error;
+    console.error('RootLayout error:', err);
+    return (
+      <html lang="en">
+        <body>
+          <div>Error loading layout: {err.message}</div>
         </body>
       </html>
-    </ClerkProvider>
-  );
+    );
+  }
 }

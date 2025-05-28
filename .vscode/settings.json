@@ -5,8 +5,7 @@
         "**/.hg": true,
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
-        ".mule": true,
-        "css.lint.unknownAtRules": "ignore"
+        ".mule": true
     }
     
 }

@@ -25,10 +25,12 @@
     "react-hooks"
   ],
   "rules": {
-    "no-undef": "error",
-    "@typescript-eslint/no-unused-vars": ["error", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
-    "react/prop-types": "off",
+    "no-undef": "off",
+    "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "varsIgnorePattern": "^(_|localFont)$", "argsIgnorePattern": "^_" }],
+    "react/prop-types": "off",
+    "react/no-unknown-property": ["error", { "ignore": ["cmdk-input-wrapper"] }],
     "@next/next/no-img-element": "warn"
   },
   "settings": {

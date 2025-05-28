@@ -13,61 +13,6 @@
  */
 
 // Source: schema.json
-export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
-};
-
-export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
-};
-
-export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
-};
-
-export type SanityFileAsset = {
-  _id: string;
-  _type: "sanity.fileAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
-
-export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
-
 export type Sale = {
   _id: string;
   _type: "sale";
@@ -96,45 +41,15 @@ export type Sale = {
   };
 };
 
-export type Order = {
+export type Post = {
   _id: string;
-  _type: "order";
+  _type: "post";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  orderNumber?: string;
-  stripeCheckoutSessionId?: string;
-  stripeCustomerId?: string;
-  clerkUserId?: string;
-  customerName?: string;
-  email?: string;
-  stripePaymentIntentId?: string;
-  products?: Array<{
-    product?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "product";
-    };
-    quantity?: number;
-    _key: string;
-  }>;
-  totalPrice?: number;
-  currency?: string;
-  amountDiscount?: number;
-  status?: "pending" | "paid" | "shipped" | "delivered" | "cancelled";
-  orderDate?: string;
-};
-
-export type Product = {
-  _id: string;
-  _type: "product";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
+  title?: string;
   slug?: Slug;
-  image?: {
+  mainImage?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -144,11 +59,9 @@ export type Product = {
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    alt?: string;
     _type: "image";
   };
-  description?: string;
-  price?: number;
-  discount?: number;
   categories?: Array<{
     _ref: string;
     _type: "reference";
@@ -156,9 +69,38 @@ export type Product = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "category";
   }>;
-  stock?: number;
-  label?: string;
-  status?: "new" | "hot" | "sale";
+  publishedAt?: string;
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
 };
 
 export type Category = {
@@ -170,12 +112,6 @@ export type Category = {
   title?: string;
   slug?: Slug;
   description?: string;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
 };
 
 export type BlockContent = Array<{
@@ -210,12 +146,30 @@ export type BlockContent = Array<{
   _key: string;
 }>;
 
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
+export type SanityImagePaletteSwatch = {
+  _type: "sanity.imagePaletteSwatch";
+  background?: string;
+  foreground?: string;
+  population?: number;
+  title?: string;
+};
+
+export type SanityImagePalette = {
+  _type: "sanity.imagePalette";
+  darkMuted?: SanityImagePaletteSwatch;
+  lightVibrant?: SanityImagePaletteSwatch;
+  darkVibrant?: SanityImagePaletteSwatch;
+  vibrant?: SanityImagePaletteSwatch;
+  dominant?: SanityImagePaletteSwatch;
+  lightMuted?: SanityImagePaletteSwatch;
+  muted?: SanityImagePaletteSwatch;
+};
+
+export type SanityImageDimensions = {
+  _type: "sanity.imageDimensions";
+  height?: number;
+  width?: number;
+  aspectRatio?: number;
 };
 
 export type SanityImageHotspot = {
@@ -224,6 +178,36 @@ export type SanityImageHotspot = {
   y?: number;
   height?: number;
   width?: number;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityFileAsset = {
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
 };
 
 export type SanityImageAsset = {
@@ -249,13 +233,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
 export type SanityImageMetadata = {
   _type: "sanity.imageMetadata";
   location?: Geopoint;
@@ -267,45 +244,32 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Sale | Order | Product | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type Geopoint = {
+  _type: "geopoint";
+  lat?: number;
+  lng?: number;
+  alt?: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
+};
+
+export type AllSanitySchemaTypes = Sale | Post | Category | BlockContent | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/helpers/index.ts
 // Variable: PRODUCTS_QUERY
 // Query: *[_type=="product"] | order(name asc)
-export type PRODUCTS_QUERYResult = Array<{
-  _id: string;
-  _type: "product";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  description?: string;
-  price?: number;
-  discount?: number;
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
-  }>;
-  stock?: number;
-  label?: string;
-  status?: "hot" | "new" | "sale";
-}>;
+export type PRODUCTS_QUERYResult = Array<never>;
 // Variable: CATEGORIES_QUERY
 // Query: *[_type=="category"] | order(name asc)
 export type CATEGORIES_QUERYResult = Array<{
@@ -349,112 +313,13 @@ export type ACTIVE_COUPON_CODEResult = {
 } | null;
 // Variable: PRODUCT_SEARCH_QUERY
 // Query: *[_type == "product" && name match $searchParam] | order(name asc)
-export type PRODUCT_SEARCH_QUERYResult = Array<{
-  _id: string;
-  _type: "product";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  description?: string;
-  price?: number;
-  discount?: number;
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
-  }>;
-  stock?: number;
-  label?: string;
-  status?: "hot" | "new" | "sale";
-}>;
+export type PRODUCT_SEARCH_QUERYResult = Array<never>;
 // Variable: PRODUCT_BY_ID_QUERY
 // Query: *[_type == "product" && slug.current == $slug] | order(name asc) [0]
-export type PRODUCT_BY_ID_QUERYResult = {
-  _id: string;
-  _type: "product";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  description?: string;
-  price?: number;
-  discount?: number;
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
-  }>;
-  stock?: number;
-  label?: string;
-  status?: "hot" | "new" | "sale";
-} | null;
+export type PRODUCT_BY_ID_QUERYResult = null;
 // Variable: PRODUCT_BY_CATEGORY_QUERY
 // Query: *[_type == 'product' && references(*[_type == "category" && slug.current == $categorySlug]._id)] | order(name asc)
-export type PRODUCT_BY_CATEGORY_QUERYResult = Array<{
-  _id: string;
-  _type: "product";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  description?: string;
-  price?: number;
-  discount?: number;
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
-  }>;
-  stock?: number;
-  label?: string;
-  status?: "hot" | "new" | "sale";
-}>;
+export type PRODUCT_BY_CATEGORY_QUERYResult = Array<never>;
 // Variable: SALE_QUERY
 // Query: *[_type == 'sale'] | order(name asc)
 export type SALE_QUERYResult = Array<{
@@ -486,63 +351,7 @@ export type SALE_QUERYResult = Array<{
 }>;
 // Variable: MY_ORDERS_QUERY
 // Query: *[_type == 'order' && clerkUserId == $userId] | order(orderData desc){    ...,products[]{      ...,product->    }  }
-export type MY_ORDERS_QUERYResult = Array<{
-  _id: string;
-  _type: "order";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  orderNumber?: string;
-  stripeCheckoutSessionId?: string;
-  stripeCustomerId?: string;
-  clerkUserId?: string;
-  customerName?: string;
-  email?: string;
-  stripePaymentIntentId?: string;
-  products: Array<{
-    product: {
-      _id: string;
-      _type: "product";
-      _createdAt: string;
-      _updatedAt: string;
-      _rev: string;
-      name?: string;
-      slug?: Slug;
-      image?: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-      };
-      description?: string;
-      price?: number;
-      discount?: number;
-      categories?: Array<{
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        _key: string;
-        [internalGroqTypeReferenceTo]?: "category";
-      }>;
-      stock?: number;
-      label?: string;
-      status?: "hot" | "new" | "sale";
-    } | null;
-    quantity?: number;
-    _key: string;
-  }> | null;
-  totalPrice?: number;
-  currency?: string;
-  amountDiscount?: number;
-  status?: "cancelled" | "delivered" | "paid" | "pending" | "shipped";
-  orderDate?: string;
-}>;
+export type MY_ORDERS_QUERYResult = Array<never>;
 
 // Query TypeMap
 import "@sanity/client";

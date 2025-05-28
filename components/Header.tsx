@@ -54,7 +54,7 @@ const Header = async () => {
                   <span className="flex flex-col">
                     <p className="text-xs">
                       <span className="font-semibold">
-                        {orders?.length || 0}
+                        {orders && orders?.length > 0 ? orders?.length : 0}
                       </span>{" "}
                       items
                     </p>

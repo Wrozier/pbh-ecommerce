@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-import localFont from "next/font/local";
+
 
 export default {
   content: [
